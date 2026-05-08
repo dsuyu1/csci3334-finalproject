@@ -1,4 +1,4 @@
-# Concurrent Task Dispatcher — Rust
+# Concurrent Task Dispatcher
 
 A multi-threaded task scheduler.
 
