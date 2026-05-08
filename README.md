@@ -81,4 +81,4 @@ The Optimized experiment uses `(1, 2)` (period 3). GCD(8, 3) = 1, so every worke
 
 **Advice rejected:** An early suggestion to use `sync_channel(0)` to force the dispatcher to wait for an idle worker before each dispatch. While theoretically cleaner for load balancing, it would have serialized the dispatcher and prevented pipelining. The round-robin push model with per-worker channels is faster and the policy layer handles balance explicitly.
 
-Also, Claude helped me make the report prettier. Making code blocks in Google Docs is a nightmare. Also, Claude was great for getting cool experimental data rather than just making a project and struggling to measure the results.
+Also, Claude helped me make the report prettier. Making code blocks in Google Docs is a nightmare. Claude was great for getting cool experimental data rather than just making a project and struggling to measure the results. Lastly, it made my comments readable and traceable. If you'd like, hopefully the comments help tracing the program better.

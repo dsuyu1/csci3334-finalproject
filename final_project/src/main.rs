@@ -57,10 +57,7 @@ fn main() {
         }
     }
 }
-
-// ──────────────────────────────────────────────────────────────────────────
 // Experiment definitions
-// ──────────────────────────────────────────────────────────────────────────
 
 /// FIFO simulation: no IO reservation, equal weights, aging disabled.
 ///
@@ -132,9 +129,8 @@ fn experiment_optimized() -> ExperimentConfig {
     }
 }
 
-// ──────────────────────────────────────────────────────────────────────────
 // Experiment runner
-// ──────────────────────────────────────────────────────────────────────────
+
 
 /// Lifecycle:
 ///   1. Generate the task list (deterministic from seed).
@@ -263,9 +259,7 @@ fn run_experiment(cfg: ExperimentConfig) {
     print_interpretation(&cfg, &summary);
 }
 
-// ──────────────────────────────────────────────────────────────────────────
-// Interpretation paragraph (required by the assignment)
-// ──────────────────────────────────────────────────────────────────────────
+// Interpretation paragraph 
 
 fn print_interpretation(cfg: &ExperimentConfig, summary: &Summary) {
     let n = summary.completions.len();
