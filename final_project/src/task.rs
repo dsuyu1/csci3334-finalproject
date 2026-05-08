@@ -87,7 +87,8 @@ pub struct WorkloadConfig {
 /// keeps the random seed authoritative: re-running with the same
 /// config produces the exact same task stream.
 pub fn generate_workload(cfg: &WorkloadConfig) -> Vec<Task> {
-    use rand_core::SeedableRng;
+    use rand::RngExt;
+    use rand_chacha::rand_core::SeedableRng;
     let mut rng = ChaCha8Rng::seed_from_u64(cfg.seed);
 
     let mut tasks = Vec::with_capacity(cfg.total_tasks as usize);
@@ -95,7 +96,7 @@ pub fn generate_workload(cfg: &WorkloadConfig) -> Vec<Task> {
 
     for id in 0..cfg.total_tasks {
         // Decide kind from the configured CPU/IO mix.
-        let kind = if rng.r#gen::<f64>() < cfg.cpu_fraction {
+        let kind = if rng.random::<f64>() < cfg.cpu_fraction {
             TaskKind::Cpu
         } else {
             TaskKind::Io
@@ -106,11 +107,11 @@ pub fn generate_workload(cfg: &WorkloadConfig) -> Vec<Task> {
             TaskKind::Cpu => cfg.cpu_duration_ms,
             TaskKind::Io => cfg.io_duration_ms,
         };
-        let duration = Duration::from_millis(rng.gen_range(lo..hi.max(lo + 1)));
+        let duration = Duration::from_millis(rng.random_range(lo..hi.max(lo + 1)));
 
         // Priority: most tasks normal, a small fraction high. The dispatcher
         // can use this if we extend the policy; right now it shows up in metrics.
-        let priority: u8 = if rng.r#gen::<f64>() < 0.1 { 2 } else { 1 };
+        let priority: u8 = if rng.random::<f64>() < 0.1 { 2 } else { 1 };
 
         // Arrival pacing.
         //
@@ -124,7 +125,7 @@ pub fn generate_workload(cfg: &WorkloadConfig) -> Vec<Task> {
         } else {
             // Inverse-CDF sampling for an exponential distribution. Clamp the
             // log argument away from zero so we don't get -inf on a 0.0 draw.
-            let u: f64 = rng.r#gen::<f64>().max(1e-9);
+            let u: f64 = rng.random::<f64>().max(1e-9);
             let gap = -u.ln() * cfg.mean_interarrival_ms;
             clock_ms += gap;
             Duration::from_micros((clock_ms * 1000.0) as u64)
