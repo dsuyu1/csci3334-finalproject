@@ -1,0 +1,32 @@
+== Optimized simulation ==
+1000 tasks, 70% IO / 30% CPU, 8 workers
+
+— results —
+total runtime        : 21802 ms
+makespan             : 21802 ms
+tasks completed      : 1000  (IO=711, CPU=289)
+avg wait time        : 11301.29 ms
+avg wait (IO only)   : 11933.57 ms
+avg wait (CPU only)  : 9745.77 ms
+avg turnaround time  : 11471.35 ms
+max wait time        : 21701 ms  (task #997)
+avg CPU usage        : 94.07 %
+avg workers active   : 7.79 / 8
+worker utilization   : 97.5 %
+monitor samples      : 2078
+monitor csv          : monitor_optimized.csv
+
+— queue statistics —
+CPU queue  max / avg : 288 / 132.91
+IO  queue  max / avg : 711 / 366.11
+fairness gap         : 2187.79 ms  (|avg_wait_CPU - avg_wait_IO|)
+
+— per-worker busy time —
+  worker  0          : 21687.74 ms ( 99.5%)
+  worker  1          : 21195.44 ms ( 97.2%)
+  worker  2          : 21316.62 ms ( 97.8%)
+  worker  3          : 21099.77 ms ( 96.8%)
+  worker  4          : 21132.09 ms ( 96.9%)
+  worker  5          : 21293.53 ms ( 97.7%)
+  worker  6          : 20544.76 ms ( 94.2%)
+  worker  7          : 21784.20 ms ( 99.9%)

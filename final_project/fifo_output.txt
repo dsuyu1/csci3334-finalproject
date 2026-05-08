@@ -1,0 +1,32 @@
+== FIFO simulation ==
+1000 tasks, 70% IO / 30% CPU, 8 workers
+
+— results —
+total runtime        : 33500 ms
+makespan             : 33500 ms
+tasks completed      : 1000  (IO=711, CPU=289)
+avg wait time        : 12949.32 ms
+avg wait (IO only)   : 12444.34 ms
+avg wait (CPU only)  : 14191.67 ms
+avg turnaround time  : 13118.66 ms
+max wait time        : 33399 ms  (task #984)
+avg CPU usage        : 89.43 %
+avg workers active   : 5.05 / 8
+worker utilization   : 63.2 %
+monitor samples      : 3226
+monitor csv          : monitor_fifo.csv
+
+— queue statistics —
+CPU queue  max / avg : 289 / 112.73
+IO  queue  max / avg : 711 / 387.27
+fairness gap         : 1747.33 ms  (|avg_wait_CPU - avg_wait_IO|)
+
+— per-worker busy time —
+  worker  0          : 33477.49 ms ( 99.9%)
+  worker  1          :  9221.47 ms ( 27.5%)
+  worker  2          : 33064.10 ms ( 98.7%)
+  worker  3          :  9411.36 ms ( 28.1%)
+  worker  4          : 31991.91 ms ( 95.5%)
+  worker  5          :  9508.27 ms ( 28.4%)
+  worker  6          : 33113.59 ms ( 98.8%)
+  worker  7          :  9551.55 ms ( 28.5%)
