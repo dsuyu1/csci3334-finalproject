@@ -2,16 +2,16 @@
 
 A multi-threaded task scheduler.
 
-## Build and Run
-
+## Run instructions
 ```bash
-cargo build --release
-cargo run --release           # runs both experiments
-cargo run --release -- fifo       # FIFO only
-cargo run --release -- optimized  # Optimized only
+cd final_project
+cargo build --release — compiles the project
+cargo run --release — runs both experiments
+cargo run --release -- fifo — runs FIFO only
+cargo run --release -- optimized — runs Optimized only
+Results printed to terminal and saved to fifo_output.txt / optimized_output.txt
+Monitor data saved to monitor_fifo.csv / monitor_optimized.csv
 ```
-
-
 ## Example Output
 
 ```
