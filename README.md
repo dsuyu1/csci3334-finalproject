@@ -77,8 +77,7 @@ The Optimized experiment uses `(1, 2)` (period 3). GCD(8, 3) = 1, so every worke
 **Tools used:** Claude Code (Anthropic) as a coding assistant throughout development. Here is some of it's advice I thought were useful and not so useful:curl https://sh.rustup.rs -sSf | sh
 
 
-**Advice accepted:** The suggestion to use `Arc<AtomicUsize>` for the active-worker counter instead of a `Mutex<usize>` — the monitor polls this every 10 ms, so lock-free reads are a meaningful win.
-
+**Advice accepted:** The suggestion to use `Arc<AtomicUsize>` for the active-worker counter instead of a `Mutex<usize>`. The monitor polls this every 10 ms.
 **Advice rejected:** An early suggestion to use `sync_channel(0)` to force the dispatcher to wait for an idle worker before each dispatch. While theoretically cleaner for load balancing, it would have serialized the dispatcher and prevented pipelining. The round-robin push model with per-worker channels is faster and the policy layer handles balance explicitly.
 
 Also, Claude helped me make the report prettier. Making code blocks in Google Docs is a nightmare. Claude was great for getting cool experimental data rather than just making a project and struggling to measure the results. Lastly, it made my comments readable and traceable. If you'd like, hopefully the comments help tracing the program better.
